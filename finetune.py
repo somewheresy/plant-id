@@ -4,22 +4,34 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 from PIL import Image
 import clip
+from clip import clip
 from datasets import load_dataset
-
+device = "cuda" if torch.cuda.is_available() else "cpu"
 # Load the dataset
-dataset = load_dataset("mikehemberger/plantnet300K")
+dataset = load_dataset("mikehemberger/plantnet300K", "default")
+# Apply the transform to the dataset
+model, preprocess = clip.load("ViT-B/32", device=device)
+# Define a custom transform
+def transform_image(example):
+    if isinstance(example['image'], list):
+        # Handle batch of images
+        return {
+            'image': [preprocess(img.convert("RGB")) for img in example['image']],
+            'label': example['label']
+        }
+    else:
+        # Handle single image
+        return {
+            'image': preprocess(example['image'].convert("RGB")),
+            'label': example['label']
+        }
 
-# Define transforms
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711))
-])
+dataset = dataset.map(transform_image, batched=True, batch_size=100)
+
+# Set the format of the dataset to PyTorch tensors
+dataset.set_format(type='torch', columns=['image', 'label'])
 
 # Load CLIP model
-device = "cuda" if torch.cuda.is_available() else "cpu"
-model, preprocess = clip.load("ViT-B/32", device=device)
-
 # Freeze CLIP parameters
 for param in model.parameters():
     param.requires_grad = False
@@ -32,16 +44,18 @@ model.classification_head = nn.Linear(model.visual.output_dim, num_classes).to(d
 optimizer = torch.optim.Adam(model.classification_head.parameters(), lr=1e-3)
 criterion = nn.CrossEntropyLoss()
 
+# Create DataLoader
+train_loader = DataLoader(dataset['train'], batch_size=32, shuffle=True)
+
 # Training loop
 num_epochs = 10
 for epoch in range(num_epochs):
-    for batch in DataLoader(dataset['train'], batch_size=32, shuffle=True):
-        images = torch.stack([transform(Image.open(img_path).convert("RGB")) for img_path in batch['image_path']]).to(device)
-        labels = torch.tensor(batch['label']).to(device)
+    for i, batch in enumerate(train_loader):
+        images = batch['image'].to(device)
+        labels = batch['label'].to(device)
         
         # Forward pass
-        with torch.no_grad():
-            image_features = model.encode_image(images)
+        image_features = model.encode_image(images)
         outputs = model.classification_head(image_features)
         
         # Backward pass and optimize
@@ -49,6 +63,13 @@ for epoch in range(num_epochs):
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
+        
+        # Print some info
+        print(f"Processed batch {i+1}. Image features shape: {image_features.shape}")
+        
+        # Break after a few batches for testing
+        if i == 5:
+            break
     
     print(f"Epoch {epoch+1}/{num_epochs}, Loss: {loss.item():.4f}")
 
