@@ -129,6 +129,29 @@ tests-mypy = ["mypy (>=1.6)", "pytest-mypy-plugins"]
 tests-no-zope = ["attrs[tests-mypy]", "cloudpickle", "hypothesis", "pympler", "pytest (>=4.3.0)", "pytest-xdist[psutil]"]
 
 [[package]]
+name = "cattrs"
+version = "23.2.3"
+description = "Composable complex class support for attrs and dataclasses."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "cattrs-23.2.3-py3-none-any.whl", hash = "sha256:0341994d94971052e9ee70662542699a3162ea1e0c62f7ce1b4a57f563685108"},
+    {file = "cattrs-23.2.3.tar.gz", hash = "sha256:a934090d95abaa9e911dac357e3a8699e0b4b14f8529bcc7d2b1ad9d51672b9f"},
+]
+
+[package.dependencies]
+attrs = ">=23.1.0"
+
+[package.extras]
+bson = ["pymongo (>=4.4.0)"]
+cbor2 = ["cbor2 (>=5.4.6)"]
+msgpack = ["msgpack (>=1.0.5)"]
+orjson = ["orjson (>=3.9.2)"]
+pyyaml = ["pyyaml (>=6.0)"]
+tomlkit = ["tomlkit (>=0.11.8)"]
+ujson = ["ujson (>=5.7.0)"]
+
+[[package]]
 name = "certifi"
 version = "2024.7.4"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -248,6 +271,40 @@ files = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
 ]
+
+[[package]]
+name = "coremltools"
+version = "7.2"
+description = "Community Tools for Core ML"
+optional = false
+python-versions = "*"
+files = [
+    {file = "coremltools-7.2-cp310-none-macosx_10_15_x86_64.whl", hash = "sha256:2b95e78b96794ff4dce514a78f641b2b0f74e24c44fb4c3923aaf27ee3d2469d"},
+    {file = "coremltools-7.2-cp310-none-macosx_11_0_arm64.whl", hash = "sha256:a3a2f99f9e81802bccdd07b4657d5190f8ca47e824a67e960fcf45e1502df153"},
+    {file = "coremltools-7.2-cp310-none-manylinux1_x86_64.whl", hash = "sha256:1ecf0a4863ac7cb90f164932f13445071925fc5eaa324c32baa56ad9196e8dd8"},
+    {file = "coremltools-7.2-cp311-none-macosx_10_15_x86_64.whl", hash = "sha256:3e22e17f02dcc69c56d12bb1e9c8faab9ab3ee8efbf44ba0d21b7f09f9259dcb"},
+    {file = "coremltools-7.2-cp311-none-macosx_11_0_arm64.whl", hash = "sha256:f47f3e139e1c51e5e2313021b084ea8dc0efa72f5cb9e0a04077c80f06a788c1"},
+    {file = "coremltools-7.2-cp311-none-manylinux1_x86_64.whl", hash = "sha256:fd0cbdd8b73c9f78689b455c10ab2f73b08f893b84b96189198f2d8709b85bdf"},
+    {file = "coremltools-7.2-cp37-none-macosx_10_15_x86_64.whl", hash = "sha256:3393b90e5210af552907d2d7ebe48cc327475b81303666ace0deb5942b913e9a"},
+    {file = "coremltools-7.2-cp37-none-manylinux1_x86_64.whl", hash = "sha256:7ea92a1250d2a8b2b287707d6ecbb606ebb78a6b0eced3d36f8333c72a9ede20"},
+    {file = "coremltools-7.2-cp38-none-macosx_10_15_x86_64.whl", hash = "sha256:e68232e42bd7128601bf566e81472b0ab7bab273edffc30bf4cc6ca84c2fa3a3"},
+    {file = "coremltools-7.2-cp38-none-macosx_11_0_arm64.whl", hash = "sha256:c018dc85e1aef47decdb0e6673a4d09fc179d6c7a26f41076374f43f4db07698"},
+    {file = "coremltools-7.2-cp38-none-manylinux1_x86_64.whl", hash = "sha256:b6aac2d38aed43fae3c0d46c5292a090410594fc09295c824182901e3d912539"},
+    {file = "coremltools-7.2-cp39-none-macosx_10_15_x86_64.whl", hash = "sha256:291cc24ce5a5a9aeb2307fe5036fee2e7e61fd22bba3f12ef6c7f04e6ba4fd0e"},
+    {file = "coremltools-7.2-cp39-none-macosx_11_0_arm64.whl", hash = "sha256:77f700bb15274ed7cd9494c4aeed37ff1ffb59339a7be00f4f5370dccc4bd71e"},
+    {file = "coremltools-7.2-cp39-none-manylinux1_x86_64.whl", hash = "sha256:adb5403a59756afe37a236b2092a75761b95cbef607d08aaee088ad081f1cbdd"},
+    {file = "coremltools-7.2.tar.gz", hash = "sha256:f2186793b85f1d23ec84f842bd11db52b7b0e6a8fe5e796550dd37c6dd3f820f"},
+]
+
+[package.dependencies]
+attrs = ">=21.3.0"
+cattrs = "*"
+numpy = ">=1.14.5"
+packaging = "*"
+protobuf = ">=3.1.0,<=4.0.0"
+pyaml = "*"
+sympy = "*"
+tqdm = "*"
 
 [[package]]
 name = "datasets"
@@ -1181,6 +1238,54 @@ typing = ["typing-extensions"]
 xmp = ["defusedxml"]
 
 [[package]]
+name = "protobuf"
+version = "3.20.3"
+description = "Protocol Buffers"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "protobuf-3.20.3-cp310-cp310-manylinux2014_aarch64.whl", hash = "sha256:f4bd856d702e5b0d96a00ec6b307b0f51c1982c2bf9c0052cf9019e9a544ba99"},
+    {file = "protobuf-3.20.3-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:9aae4406ea63d825636cc11ffb34ad3379335803216ee3a856787bcf5ccc751e"},
+    {file = "protobuf-3.20.3-cp310-cp310-win32.whl", hash = "sha256:28545383d61f55b57cf4df63eebd9827754fd2dc25f80c5253f9184235db242c"},
+    {file = "protobuf-3.20.3-cp310-cp310-win_amd64.whl", hash = "sha256:67a3598f0a2dcbc58d02dd1928544e7d88f764b47d4a286202913f0b2801c2e7"},
+    {file = "protobuf-3.20.3-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:899dc660cd599d7352d6f10d83c95df430a38b410c1b66b407a6b29265d66469"},
+    {file = "protobuf-3.20.3-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:e64857f395505ebf3d2569935506ae0dfc4a15cb80dc25261176c784662cdcc4"},
+    {file = "protobuf-3.20.3-cp37-cp37m-manylinux2014_aarch64.whl", hash = "sha256:d9e4432ff660d67d775c66ac42a67cf2453c27cb4d738fc22cb53b5d84c135d4"},
+    {file = "protobuf-3.20.3-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:74480f79a023f90dc6e18febbf7b8bac7508420f2006fabd512013c0c238f454"},
+    {file = "protobuf-3.20.3-cp37-cp37m-win32.whl", hash = "sha256:b6cc7ba72a8850621bfec987cb72623e703b7fe2b9127a161ce61e61558ad905"},
+    {file = "protobuf-3.20.3-cp37-cp37m-win_amd64.whl", hash = "sha256:8c0c984a1b8fef4086329ff8dd19ac77576b384079247c770f29cc8ce3afa06c"},
+    {file = "protobuf-3.20.3-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:de78575669dddf6099a8a0f46a27e82a1783c557ccc38ee620ed8cc96d3be7d7"},
+    {file = "protobuf-3.20.3-cp38-cp38-manylinux2014_aarch64.whl", hash = "sha256:f4c42102bc82a51108e449cbb32b19b180022941c727bac0cfd50170341f16ee"},
+    {file = "protobuf-3.20.3-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:44246bab5dd4b7fbd3c0c80b6f16686808fab0e4aca819ade6e8d294a29c7050"},
+    {file = "protobuf-3.20.3-cp38-cp38-win32.whl", hash = "sha256:c02ce36ec760252242a33967d51c289fd0e1c0e6e5cc9397e2279177716add86"},
+    {file = "protobuf-3.20.3-cp38-cp38-win_amd64.whl", hash = "sha256:447d43819997825d4e71bf5769d869b968ce96848b6479397e29fc24c4a5dfe9"},
+    {file = "protobuf-3.20.3-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:398a9e0c3eaceb34ec1aee71894ca3299605fa8e761544934378bbc6c97de23b"},
+    {file = "protobuf-3.20.3-cp39-cp39-manylinux2014_aarch64.whl", hash = "sha256:bf01b5720be110540be4286e791db73f84a2b721072a3711efff6c324cdf074b"},
+    {file = "protobuf-3.20.3-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:daa564862dd0d39c00f8086f88700fdbe8bc717e993a21e90711acfed02f2402"},
+    {file = "protobuf-3.20.3-cp39-cp39-win32.whl", hash = "sha256:819559cafa1a373b7096a482b504ae8a857c89593cf3a25af743ac9ecbd23480"},
+    {file = "protobuf-3.20.3-cp39-cp39-win_amd64.whl", hash = "sha256:03038ac1cfbc41aa21f6afcbcd357281d7521b4157926f30ebecc8d4ea59dcb7"},
+    {file = "protobuf-3.20.3-py2.py3-none-any.whl", hash = "sha256:a7ca6d488aa8ff7f329d4c545b2dbad8ac31464f1d8b1c87ad1346717731e4db"},
+    {file = "protobuf-3.20.3.tar.gz", hash = "sha256:2e3427429c9cffebf259491be0af70189607f365c2f41c7c3764af6f337105f2"},
+]
+
+[[package]]
+name = "pyaml"
+version = "24.4.0"
+description = "PyYAML-based module to produce a bit more pretty and readable YAML-serialized data"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pyaml-24.4.0-py3-none-any.whl", hash = "sha256:acc2b39c55cb0cbe4f694a6d3886f89ad3d2a5b3efcece526202f8de9a6b27de"},
+    {file = "pyaml-24.4.0.tar.gz", hash = "sha256:0e483d9289010e747a325dc43171bcc39d6562dd1dd4719e8cc7e7c96c99fce6"},
+]
+
+[package.dependencies]
+PyYAML = "*"
+
+[package.extras]
+anchors = ["unidecode"]
+
+[[package]]
 name = "pyarrow"
 version = "16.1.0"
 description = "Python library for Apache Arrow"
@@ -1873,4 +1978,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "597b90cd4c5b142dc2a487a59ad58cdbb73251fe8b57387da70738cbe1e4c5b6"
+content-hash = "75f3b6cf127f7f0f22f697a7ec027bbe703cf7c89fe65e65bb0651c388206719"

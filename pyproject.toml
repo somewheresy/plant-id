@@ -15,6 +15,7 @@ ftfy = "^6.0.3"
 regex = "^2021.8.28"
 tqdm = "^4.62.2"
 openai-clip = "^1.0.1"
+coremltools = "^7.2"
 
 [build-system]
 requires = ["poetry-core"]
